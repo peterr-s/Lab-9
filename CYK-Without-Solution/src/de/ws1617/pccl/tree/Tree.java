@@ -24,6 +24,7 @@ public class Tree<T> {
 	 */
 	public Tree(T data) {
 		this.data = data;
+		children = new ArrayList<Tree<T>>();
 	}
 
 	public void addChild(Tree<T> c) {
@@ -117,4 +118,17 @@ public class Tree<T> {
 		return true;
 	}
 
+	public String toString()
+	{
+		String stringForm = data.toString();
+		if(!children.isEmpty())
+		{
+			stringForm += " [";
+			for(Tree<T> child : children)
+				stringForm += child.toString() + " ";
+			stringForm = stringForm.trim();
+			stringForm += "]";
+		}
+		return stringForm;
+	}
 }

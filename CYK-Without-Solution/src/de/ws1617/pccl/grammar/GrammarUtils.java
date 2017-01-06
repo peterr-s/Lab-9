@@ -35,16 +35,16 @@ public class GrammarUtils {
 
 				// iterate over rhs
 				String[] rhsSplit = rhs.split("\\s+");
-				ArrayList<Symbol> rhsList = new ArrayList<>();
+				ArrayList<NonTerminal> rhsList = new ArrayList<>(); // Chomsky normal form
 				for (int i = 0; i < rhsSplit.length; i++) {
 					String symb = rhsSplit[i];
-					Symbol s = null;
-					if (NonTerminal.isNonTerminal(symb)) {
+					NonTerminal s = new NonTerminal(symb);
+					/*if (NonTerminal.isNonTerminal(symb)) {
 						s = new NonTerminal(symb);
 					} else {
 						System.out.println("terminal in rhs: " + s);
 						s = new Terminal(symb);
-					}
+					}*/
 					rhsList.add(s);
 				}
 				gr.addRule(lhsSymb, rhsList);

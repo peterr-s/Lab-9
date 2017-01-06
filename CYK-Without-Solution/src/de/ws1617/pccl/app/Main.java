@@ -26,15 +26,19 @@ public class Main
 
 			ArrayList<Terminal> tokens = new ArrayList<Terminal>();
 			for(int i = 3; i < args.length; i ++)
-				tokens.add(new Terminal(args[i]));
-
+				tokens.add(new Terminal(args[i].toLowerCase()));
+			
 			ArrayList<Tree<Symbol>> parses = CYK.parse(grammar, lexicon, start, tokens);
+			if(parses == null)
+				System.out.println("No parses found.");
+			else for(Tree<Symbol> parse : parses)
+				System.out.println(parse.toString());
 
 		}
-		catch (ArrayIndexOutOfBoundsException e)
+		/*catch (ArrayIndexOutOfBoundsException e)
 		{
 			System.err.println("Not enough arguments. Provide a grammar, a lexicon, a start symbol, and a sentence.");
-		}
+		}*/
 		catch (IOException e)
 		{
 			System.err.println("File read error: " + e.getMessage());

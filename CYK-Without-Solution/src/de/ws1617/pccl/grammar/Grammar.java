@@ -10,9 +10,9 @@ public class Grammar {
 	// set of non-terminals in this grammar
 	private HashSet<NonTerminal> nts;
 	// key: NT (LHS), value: Set<List<Symbols>> (RHS)
-	private HashMap<NonTerminal, HashSet<ArrayList<Symbol>>> rules;
+	private HashMap<NonTerminal, HashSet<ArrayList<NonTerminal>>> rules;
 	// key: NT (rightmost), value: map<NT (lhs), Set<List<Symbol>> (rule rhs)
-	private HashMap<NonTerminal, HashMap<NonTerminal, HashSet<ArrayList<Symbol>>>> rightMostMap;
+	private HashMap<NonTerminal, HashMap<NonTerminal, HashSet<ArrayList<NonTerminal>>>> rightMostMap;
 
 	/**
 	 * Creates an empty grammar.
@@ -42,7 +42,7 @@ public class Grammar {
 	 * @param lhs the rule left hand side.
 	 * @param rhs the rule right hand side.
 	 */
-	public void addRule(NonTerminal lhs, ArrayList<Symbol> rhs) {
+	public void addRule(NonTerminal lhs, ArrayList<NonTerminal> rhs) {
 		addKey(lhs);
 		rules.get(lhs).add(rhs);
 		for (int i = 0; i < rhs.size(); i++) {
@@ -69,7 +69,7 @@ public class Grammar {
 	 * 
 	 * @return a list of rules.
 	 */
-	public HashMap<NonTerminal, HashSet<ArrayList<Symbol>>> getRulesByRightmost(NonTerminal rightmost) {
+	public HashMap<NonTerminal, HashSet<ArrayList<NonTerminal>>> getRulesByRightmost(NonTerminal rightmost) {
 		if (!rightMostMap.containsKey(rightmost)) {
 			return new HashMap<>();
 		}
@@ -83,11 +83,11 @@ public class Grammar {
 	 * @param lhs the rule left hand side.
 	 * @return a set of rule right hand sides.
 	 */
-	public HashSet<ArrayList<Symbol>> getRuleForLHS(NonTerminal lhs) {
+	public HashSet<ArrayList<NonTerminal>> getRuleForLHS(NonTerminal lhs) {
 		if (rules.containsKey(lhs)) {
 			return rules.get(lhs);
 		}
-		return new HashSet<ArrayList<Symbol>>();
+		return new HashSet<ArrayList<NonTerminal>>();
 	}
 	
 	/**
@@ -98,7 +98,7 @@ public class Grammar {
 	public String prettyPrint() {
 		StringBuilder sb = new StringBuilder();
 		for (NonTerminal lhs : rules.keySet()) {
-			for (ArrayList<Symbol> rhs : rules.get(lhs)) {
+			for (ArrayList<NonTerminal> rhs : rules.get(lhs)) {
 				sb.append(lhs);
 				sb.append(" --> ");
 				for (int i = 0; i < rhs.size(); i++) {
@@ -117,7 +117,8 @@ public class Grammar {
 	 * @return all non-terminals used in the grammar.
 	 */
 	public Set<NonTerminal> getNonTerminals() {
-		return nts;
+		//return nts;
+		return rules.keySet();
 	}
 
 }
