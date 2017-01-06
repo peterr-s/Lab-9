@@ -33,7 +33,10 @@ public class DOTWriter
 	public static void write(Tree tree, boolean DOT, boolean JPG)
 	{
 		String DOTString = makeDOT(tree);
-		String path = "./" + tree.hashCode();
+		int hash = tree.hashCode();
+		/*if(hash < 0)
+			hash *= -1;*/
+		String path = "./tree" + hash;
 		
 		// make DOT file
 		try
@@ -51,7 +54,7 @@ public class DOTWriter
 		// make JPG file
 		if(JPG) try
 		{
-			Runtime.getRuntime().exec("dot -Tjpg " + path + ".dot -o " + path + ".jpg");
+			Runtime.getRuntime().exec("dot -Tjpg " + path + ".dot -o " + path + ".jpg").waitFor();
 			System.out.println(path + ".jpg created.");
 		}
 		catch(Exception e)
