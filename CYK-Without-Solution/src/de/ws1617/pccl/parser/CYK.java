@@ -15,7 +15,7 @@ import de.ws1617.pccl.tree.Tree;
 public class CYK
 {
 
-	public static ArrayList<Tree<Symbol>> parse(Grammar grammar, Lexicon lexicon, NonTerminal startSymbol, ArrayList<Terminal> tokens)
+	public static ArrayList<Tree<Symbol>> parse(Grammar grammar, Lexicon lexicon, NonTerminal startSymbol, ArrayList<Terminal> tokens, boolean showTable)
 	{
 		int n = tokens.size();
 
@@ -118,17 +118,20 @@ public class CYK
 			}
 		}
 
-		// DEBUG: show table
-		/*for(Terminal token : tokens)
-			System.out.print(token.getValue() + "\t");
-		System.out.println();
-		for(int i = 0; i < n; i++)
+		// show table
+		if(showTable)
 		{
-			for(int j = 0; j < n; j++)
-				System.out.print(parses[j][i].keySet() + "\t");
+			for(Terminal token : tokens)
+				System.out.print(token.getValue() + "\t");
+			System.out.println();
+			for(int i = 0; i < n; i++)
+			{
+				for(int j = 0; j < n; j++)
+					System.out.print(parses[j][i].keySet() + "\t");
+				System.out.println();
+			}
 			System.out.println();
 		}
-		System.out.println();*/
 		
 		return parses[0][n - 1].get(startSymbol);
 	}
