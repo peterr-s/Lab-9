@@ -20,10 +20,10 @@ public class DOTWriter
 		List<Tree> children = tree.getChildren();
 		
 		// make entry for this node
-		String stringForm = "\t{" + System.identityHashCode(tree) + "[label=\"" + tree.getData().toString() + "\"" + (tree.getData() instanceof Terminal ? " shape=box" : "") + "]} -> {";
+		String stringForm = "{" + System.identityHashCode(tree) + "[label=\"" + tree.getData().toString() + "\"" + (tree.getData() instanceof Terminal ? " shape=box" : "") + "]} -> {";
 		for(Tree t : children)
 			stringForm += System.identityHashCode(t) + " ";
-		stringForm += "}\n";
+		stringForm = "\t" + stringForm.trim() + "}\n";
 		
 		// make child entries recursively
 		for(Tree t : children)
