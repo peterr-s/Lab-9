@@ -16,11 +16,17 @@ public class NonTerminal extends Symbol {
 	public NonTerminal(String value) {
 
 		// don't alter input argument
-		String toSet = String.valueOf(value);
+		/*String toSet = String.valueOf(value);
 		if (toSet.startsWith("[") && toSet.endsWith("]")) {
 			toSet = toSet.substring(1, toSet.length() - 1);
 		}
-		setValue(toSet);
+		setValue(toSet);*/
+		
+		// same thing with more elegance:
+		//setValue(value.startsWith("[") && value.endsWith("]") ? value.substring(1, value.length() - 1) : value);
+		
+		// even better:
+		super(value.startsWith("[") && value.endsWith("]") ? value.substring(1, value.length() - 1) : value);
 	}
 
 	/**

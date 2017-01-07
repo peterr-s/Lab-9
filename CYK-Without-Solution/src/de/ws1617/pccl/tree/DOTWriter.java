@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.List;
 
+import de.ws1617.pccl.grammar.Terminal;
+
 @SuppressWarnings({ "rawtypes", "unchecked" }) // generics are weird but this is all kosher I swear
 public class DOTWriter
 {
@@ -18,9 +20,9 @@ public class DOTWriter
 		List<Tree> children = tree.getChildren();
 		
 		// make entry for this node
-		String stringForm = "\t{" + tree.hashCode() + "[label=\"" + tree.getData().toString() + "\"]} -> {";
+		String stringForm = "\t{" + System.identityHashCode(tree) + "[label=\"" + tree.getData().toString() + "\"" + (tree.getData() instanceof Terminal ? " shape=box" : "") + "]} -> {";
 		for(Tree t : children)
-			stringForm += t.hashCode() + " ";
+			stringForm += System.identityHashCode(t) + " ";
 		stringForm += "}\n";
 		
 		// make child entries recursively
