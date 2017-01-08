@@ -74,18 +74,25 @@ public class Main
 			{
 				// show number of parses found
 				int ct = parses.size();
-				System.out.println(ct + " parse" + (ct != 1 ? "s" : "") + " found.\n");
+				System.out.println("\n" + ct + " parse" + (ct != 1 ? "s" : "") + " found.");
 				
 				// show bracketed forms
-				if(brackets < 0)
-					brackets = ct;
-				for(int i = 0; i < brackets; i++)
-					System.out.println(parses.get(i).toString());
-				System.out.println(); // formatting
+				if(brackets != 0)
+				{
+					System.out.println();
+					if(brackets < 0)
+						brackets = ct;
+					for(int i = 0; i < brackets; i++)
+						System.out.println(parses.get(i).toString());
+				}
 				
 				// make files
-				if(makeDOT || makeJPG) for(Tree<Symbol> parse : parses)
-					DOTWriter.write(parse, makeDOT, makeJPG);
+				if(makeDOT || makeJPG)
+				{
+					System.out.println();
+					for(Tree<Symbol> parse : parses)
+						DOTWriter.write(parse, makeDOT, makeJPG);
+				}
 			}
 
 		}
@@ -105,6 +112,7 @@ public class Main
 			System.exit(1);
 		}
 		
+		System.out.println();
 		System.exit(0);
 	}
 }

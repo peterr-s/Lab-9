@@ -125,6 +125,7 @@ public class CYK
 			for(Terminal token : tokens) if((l = token.getValue().length()) > max)
 				max = l;
 			String formatString = "%-" + (max + 1) + "s";
+			System.out.println(); // formatting
 			for(Terminal token : tokens)
 				System.out.print(String.format(formatString, token.getValue()));
 			System.out.println();
@@ -134,7 +135,6 @@ public class CYK
 					System.out.print(String.format(formatString, parses[j][i].keySet()));
 				System.out.println();
 			}
-			System.out.println();
 		}
 		
 		return parses[0][n - 1].get(startSymbol);
