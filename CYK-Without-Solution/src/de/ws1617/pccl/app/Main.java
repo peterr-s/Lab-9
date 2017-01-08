@@ -92,10 +92,19 @@ public class Main
 		catch (ArrayIndexOutOfBoundsException e)
 		{
 			System.err.println("Not enough arguments. Provide a grammar, a lexicon, a start symbol, and a sentence.");
+			System.exit(1);
 		}
 		catch (IOException e)
 		{
 			System.err.println("File read error: " + e.getMessage());
+			System.exit(1);
 		}
+		catch (Exception e)
+		{
+			System.err.println("Error: " + e.getMessage());
+			System.exit(1);
+		}
+		
+		System.exit(0);
 	}
 }
