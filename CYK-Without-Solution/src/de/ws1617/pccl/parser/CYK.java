@@ -121,13 +121,17 @@ public class CYK
 		// show table
 		if(showTable)
 		{
+			int max = 0, l;
+			for(Terminal token : tokens) if((l = token.getValue().length()) > max)
+				max = l;
+			String formatString = "%-" + (max + 1) + "s";
 			for(Terminal token : tokens)
-				System.out.print(token.getValue() + "\t");
+				System.out.print(String.format(formatString, token.getValue()));
 			System.out.println();
 			for(int i = 0; i < n; i++)
 			{
-				for(int j = 0; j < n; j++)
-					System.out.print(parses[j][i].keySet() + "\t");
+				for(int j = 0; j + i < n; j++)
+					System.out.print(String.format(formatString, parses[j][i].keySet()));
 				System.out.println();
 			}
 			System.out.println();
