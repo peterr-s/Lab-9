@@ -121,7 +121,7 @@ public class CYK
 		// show table
 		if(showTable)
 		{
-			int max = 0, l;
+			int max = 8, l; // 8 is default tab length in cmd.exe
 			for(Terminal token : tokens) if((l = token.getValue().length()) > max)
 				max = l;
 			String formatString = "%-" + (max + 1) + "s";
